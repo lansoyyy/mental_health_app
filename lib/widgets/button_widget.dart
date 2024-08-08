@@ -16,7 +16,7 @@ class ButtonWidget extends StatelessWidget {
       {super.key,
       this.radius = 10,
       required this.label,
-      this.textColor = Colors.white,
+      this.textColor = Colors.black,
       required this.onPressed,
       this.width = 275,
       this.fontSize = 18,
