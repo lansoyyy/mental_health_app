@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mental_health_app/screens/tabs/journal_tab.dart';
+import 'package:mental_health_app/widgets/textfield_widget.dart';
 
 import '../utils/colors.dart';
 import '../widgets/logout_widget.dart';
@@ -16,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const SizedBox(),
+    const JournalTab(),
     const SizedBox(),
     const SizedBox(),
   ];
@@ -26,6 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
   }
+
+  final title = TextEditingController();
+  final description = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.add,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                addJournalDialog();
+              },
             )
           : null,
       appBar: AppBar(
@@ -82,5 +89,49 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
       ),
     );
+  }
+
+  addJournalDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextFieldWidget(
+                    label: 'Title',
+                    controller: title,
+                  ),
+                  TextFieldWidget(
+                    label: 'Description',
+                    controller: description,
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                MaterialButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(
+                        fontFamily: 'QRegular', fontWeight: FontWeight.bold),
+                  ),
+                ),
+                MaterialButton(
+                  onPressed: () async {
+                    Navigator.of(context).pop(true);
+                    // Navigator.of(context).pushReplacement(
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const LoginScreen()),
+                    // );
+                  },
+                  child: const Text(
+                    'Add Journal',
+                    style: TextStyle(
+                        fontFamily: 'QRegular', fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ));
   }
 }
