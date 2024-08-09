@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     controller: title,
                   ),
                   TextFieldWidget(
-                    label: 'Description',
+                    label: 'Note',
                     controller: description,
                   ),
                 ],

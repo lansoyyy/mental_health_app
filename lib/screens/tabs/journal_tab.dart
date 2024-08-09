@@ -18,7 +18,7 @@ class JournalTab extends StatelessWidget {
                 fontFamily: 'Bold',
               ),
               TextWidget(
-                text: 'Description here',
+                text: 'Note here',
                 fontSize: 12,
                 fontFamily: 'Regular',
                 color: Colors.grey,
