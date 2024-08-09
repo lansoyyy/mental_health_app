@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/screens/tabs/journal_tab.dart';
+import 'package:mental_health_app/screens/tabs/seminar_tab.dart';
 import 'package:mental_health_app/widgets/textfield_widget.dart';
 
 import '../utils/colors.dart';
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const JournalTab(),
-    const SizedBox(),
+    const SeminarTab(),
     const SizedBox(),
   ];
 
