@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mental_health_app/screens/tabs/counselling_tab.dart';
 import 'package:mental_health_app/screens/tabs/journal_tab.dart';
 import 'package:mental_health_app/screens/tabs/seminar_tab.dart';
 import 'package:mental_health_app/widgets/textfield_widget.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static final List<Widget> _widgetOptions = <Widget>[
     const JournalTab(),
     const SeminarTab(),
-    const SizedBox(),
+    const CounsellingTab(),
   ];
 
   void _onItemTapped(int index) {

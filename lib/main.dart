@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/screens/auth/landing_screen.dart';
+import 'package:mental_health_app/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: LandingScreen(),
+      home: HomeScreen(),
     );
   }
 }
