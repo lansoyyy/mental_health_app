@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mental_health_app/screens/initial_home_screen.dart';
 
 import '../../widgets/button_widget.dart';
 import '../../widgets/text_widget.dart';
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   label: 'Login',
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
+                        builder: (context) => const InitialHomeScreen()));
                   },
                 ),
 
