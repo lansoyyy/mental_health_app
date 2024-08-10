@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "210007134201",
+    "project_id": "mindspace-73c00",
+    "storage_bucket": "mindspace-73c00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210007134201:android:dfb0f3c61d37ff7edbf728",
+        "android_client_info": {
+          "package_name": "com.example.mental_health_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBraqxQfzwF7C1Vexw-QVkmlwqlMA87tb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
