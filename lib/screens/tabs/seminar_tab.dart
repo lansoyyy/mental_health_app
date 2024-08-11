@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mental_health_app/services/add_seminar.dart';
 import 'package:mental_health_app/widgets/button_widget.dart';
 import 'package:mental_health_app/widgets/text_widget.dart';
 import 'package:mental_health_app/widgets/textfield_widget.dart';
+import 'package:mental_health_app/widgets/toast_widget.dart';
 
 class SeminarTab extends StatefulWidget {
   const SeminarTab({super.key});
@@ -136,7 +138,15 @@ class _SeminarTabState extends State<SeminarTab> {
                 ),
                 MaterialButton(
                   onPressed: () async {
+                    addSeminar(
+                        data['date'], venue.text, speaker.text, topic.text);
                     Navigator.of(context).pop(true);
+
+                    venue.clear();
+                    speaker.clear();
+                    topic.clear();
+
+                    showToast('Appointment added succesfully!');
                     // Navigator.of(context).pushReplacement(
                     //   MaterialPageRoute(
                     //       builder: (context) => const LoginScreen()),
