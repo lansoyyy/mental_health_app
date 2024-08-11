@@ -4,6 +4,8 @@ import 'package:mental_health_app/firebase_options.dart';
 import 'package:mental_health_app/screens/auth/landing_screen.dart';
 import 'package:mental_health_app/screens/home_screen.dart';
 
+import 'screens/auth/login_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }
