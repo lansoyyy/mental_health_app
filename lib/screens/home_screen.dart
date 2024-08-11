@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mental_health_app/screens/tabs/counselling_tab.dart';
 import 'package:mental_health_app/screens/tabs/journal_tab.dart';
 import 'package:mental_health_app/screens/tabs/seminar_tab.dart';
+import 'package:mental_health_app/services/add_note.dart';
 import 'package:mental_health_app/widgets/textfield_widget.dart';
 
 import '../utils/colors.dart';
@@ -122,13 +123,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialButton(
                   onPressed: () async {
                     Navigator.of(context).pop(true);
+                    addNote(title.text, description.text);
                     // Navigator.of(context).pushReplacement(
                     //   MaterialPageRoute(
                     //       builder: (context) => const LoginScreen()),
                     // );
                   },
                   child: const Text(
-                    'Add Journal',
+                    'Add Note',
                     style: TextStyle(
                         fontFamily: 'QRegular', fontWeight: FontWeight.bold),
                   ),

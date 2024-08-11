@@ -76,16 +76,18 @@ class _SecondaryHomeScreenState extends State<SecondaryHomeScreen> {
           const SizedBox(
             height: 50,
           ),
-          ButtonWidget(
-            fontSize: 14,
-            textColor: Colors.white,
-            color: Colors.blue,
-            label: 'Continue',
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
-            },
-          ),
+          selectedEmotions.isEmpty
+              ? const SizedBox()
+              : ButtonWidget(
+                  fontSize: 14,
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  label: 'Continue',
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+                  },
+                ),
         ],
       ),
     );
