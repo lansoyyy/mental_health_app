@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/screens/secondary_home_screen.dart';
 import 'package:mental_health_app/utils/colors.dart';
+import 'package:mental_health_app/utils/data.dart';
 import 'package:mental_health_app/widgets/text_widget.dart';
 
 import '../widgets/button_widget.dart';
@@ -16,11 +17,15 @@ class InitialHomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextWidget(
-            text: 'How are you feeling now?',
-            fontSize: 32,
-            fontFamily: 'Bold',
-            color: Colors.black,
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: TextWidget(
+              text: questions[DateTime.now().day],
+              fontSize: 32,
+              fontFamily: 'Bold',
+              color: Colors.black,
+              maxLines: 3,
+            ),
           ),
           Padding(
             padding:
