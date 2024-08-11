@@ -4,6 +4,7 @@ import 'package:mental_health_app/screens/chat_screen.dart';
 import 'package:mental_health_app/widgets/button_widget.dart';
 import 'package:mental_health_app/widgets/text_widget.dart';
 import 'package:mental_health_app/widgets/textfield_widget.dart';
+import 'package:mental_health_app/widgets/toast_widget.dart';
 
 class CounsellingTab extends StatefulWidget {
   const CounsellingTab({super.key});
@@ -66,10 +67,12 @@ class _CounsellingTabState extends State<CounsellingTab> {
                               ? ButtonWidget(
                                   label: data.docs[index]['time'],
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ChatScreen()));
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) => ChatScreen(
+                                                  time: data.docs[index]
+                                                      ['time'],
+                                                )));
                                   },
                                 )
                               : Banner(
@@ -78,7 +81,9 @@ class _CounsellingTabState extends State<CounsellingTab> {
                                   layoutDirection: TextDirection.ltr,
                                   child: ButtonWidget(
                                     label: data.docs[index]['time'],
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      showToast('Cannot proceed!');
+                                    },
                                   ),
                                 ),
                         ),
