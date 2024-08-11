@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/screens/chat_screen.dart';
 import 'package:mental_health_app/widgets/button_widget.dart';
@@ -33,37 +34,59 @@ class _CounsellingTabState extends State<CounsellingTab> {
           const SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 15, bottom: 15),
-                  child: Center(
-                    child: index % 2 != 0
-                        ? ButtonWidget(
-                            label: 'Time here',
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const ChatScreen()));
-                            },
-                          )
-                        : Banner(
-                            message: 'Already Taken',
-                            location: BannerLocation.topEnd,
-                            layoutDirection: TextDirection.ltr,
-                            child: ButtonWidget(
-                              label: 'Time here',
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => const ChatScreen()));
-                              },
-                            ),
-                          ),
+          StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('Counselling')
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return const Center(child: Text('Error'));
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 50),
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.black,
+                    )),
+                  );
+                }
+
+                final data = snapshot.requireData;
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: data.docs.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 15, bottom: 15),
+                        child: Center(
+                          child: !data.docs[index]['isTaken']
+                              ? ButtonWidget(
+                                  label: data.docs[index]['time'],
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ChatScreen()));
+                                  },
+                                )
+                              : Banner(
+                                  message: 'Already Taken',
+                                  location: BannerLocation.topEnd,
+                                  layoutDirection: TextDirection.ltr,
+                                  child: ButtonWidget(
+                                    label: data.docs[index]['time'],
+                                    onPressed: () {},
+                                  ),
+                                ),
+                        ),
+                      );
+                    },
                   ),
                 );
-              },
-            ),
-          ),
+              }),
         ],
       ),
     );
