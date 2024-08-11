@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mental_health_app/widgets/button_widget.dart';
 import 'package:mental_health_app/widgets/text_widget.dart';
 import 'package:mental_health_app/widgets/textfield_widget.dart';
@@ -29,46 +31,76 @@ class _SeminarTabState extends State<SeminarTab> {
           const SizedBox(
             height: 20,
           ),
-          Expanded(
-            child: ListView.separated(
-              itemCount: 5,
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextWidget(
-                        text: 'Date',
-                        fontSize: 16,
-                        fontFamily: 'Bold',
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Center(
-                        child: ButtonWidget(
-                          label: 'Date here',
-                          onPressed: () {
-                            addSeminarDialog();
-                          },
+          StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('Seminars')
+                  .orderBy('date', descending: true)
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return const Center(child: Text('Error'));
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 50),
+                    child: Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.black,
+                    )),
+                  );
+                }
+
+                final data = snapshot.requireData;
+                return Expanded(
+                  child: ListView.separated(
+                    itemCount: data.docs.length,
+                    separatorBuilder: (context, index) {
+                      return const Divider();
+                    },
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextWidget(
+                              text: 'Date',
+                              fontSize: 16,
+                              fontFamily: 'Bold',
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Center(
+                              child: ButtonWidget(
+                                label: DateFormat.yMMMd()
+                                    .add_jm()
+                                    .format(data.docs[index]['date'].toDate()),
+                                onPressed: () {
+                                  addSeminarDialog(data.docs[index]);
+                                },
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 );
-              },
-            ),
-          ),
+              }),
         ],
       ),
     );
   }
 
-  addSeminarDialog() {
+  addSeminarDialog(data) {
+    setState(() {
+      venue.text = data['venue'];
+      speaker.text = data['speaker'];
+      topic.text = data['topic'];
+    });
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -76,14 +108,17 @@ class _SeminarTabState extends State<SeminarTab> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFieldWidget(
+                    enabled: false,
                     label: 'Venue',
                     controller: venue,
                   ),
                   TextFieldWidget(
+                    enabled: false,
                     label: 'Speaker',
                     controller: speaker,
                   ),
                   TextFieldWidget(
+                    enabled: false,
                     maxLine: 5,
                     label: 'Topic',
                     controller: topic,
