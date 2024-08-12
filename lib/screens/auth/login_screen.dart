@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 const Text(
-                  'Mental Health\nApplication',
+                  'Mindspace',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 32,
