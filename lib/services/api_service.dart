@@ -11,7 +11,7 @@ class ChatGPTService {
     final response = await http.post(Uri.parse(_apiUrl),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $openaikey'
+          'Authorization': 'Bearer '
         },
         body: jsonEncode({
           'model': 'gpt-3.5-turbo',
