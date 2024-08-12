@@ -41,6 +41,7 @@ class JournalTab extends StatelessWidget {
                       text: data.docs[index]['title'],
                       fontSize: 16,
                       fontFamily: 'Bold',
+                      color: Colors.black,
                     ),
                     TextWidget(
                       text: data.docs[index]['note'],

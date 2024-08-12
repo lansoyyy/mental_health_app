@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/auth/login_screen.dart';
+
 logout(BuildContext context, Widget navigationRoute) {
   return showDialog(
       context: context,
@@ -24,10 +26,10 @@ logout(BuildContext context, Widget navigationRoute) {
               ),
               MaterialButton(
                 onPressed: () async {
-                  // Navigator.of(context).pushReplacement(
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const LoginScreen()),
-                  // );
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                  );
                 },
                 child: const Text(
                   'Continue',

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mental_health_app/screens/initial_home_screen.dart';
+import 'package:mental_health_app/utils/colors.dart';
 
 import '../../widgets/button_widget.dart';
 import '../../widgets/text_widget.dart';
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: primary,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
